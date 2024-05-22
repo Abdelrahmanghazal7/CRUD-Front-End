@@ -1,39 +1,39 @@
-let postTitle = document.getElementById("title");
-let postPrice = document.getElementById("price");
-let postDescription = document.getElementById("description");
-let addpostBtn = document.getElementById("add");
-let updatepostBtn = document.getElementById("update");
+let productName = document.getElementById("name");
+let productPrice = document.getElementById("price");
+let productDescription = document.getElementById("description");
+let addProductBtn = document.getElementById("add");
+let updateProductBtn = document.getElementById("update");
 let searchInput = document.getElementById("searchInput");
-let totalPostsElement = document.getElementById("total");
+let totalProducts = document.getElementById("total");
 
-let posts = [];
+let products = [];
 let globalId = "";
 
 function getData() {
   fetch("https://crud-node-js.vercel.app/products")
     .then((response) => response.json())
     .then((data) => {
-      posts = data;
-      displayPosts();
-      totalPostsElement.innerHTML = posts.length;
+      products = data;
+      displayproducts();
+      totalProducts.innerHTML = products.length;
     });
 }
 getData();
 
-function displayPosts() {
+function displayproducts() {
   let cartona = ``;
 
-  for (let i = 0; i < posts.length; i++) {
+  for (let i = 0; i < products.length; i++) {
     cartona += `
         <tr>
         <td>${[i + 1]}</td>
-        <td>${posts[i].title}</td>
-        <td>${posts[i].price}</td>
-        <td>${posts[i].description}</td>
+        <td>${products[i].name}</td>
+        <td>${products[i].price}</td>
+        <td>${products[i].description}</td>
         <td class="actions">
             <button class="btn btn-update" onclick="setData(${i})">Update</button>
             <button class="btn btn-delete" onclick="deletePost(${
-              posts[i].id
+              products[i].id
             })">Delete</button>
         </td>
     </tr>
@@ -53,45 +53,46 @@ function api(method, data) {
     body: JSON.stringify(data),
   })
     .then((response) => response.json())
-    .then(() => getData()).catch((error)=>console.log(error))
+    .then(() => getData())
+    .catch((error) => console.log(error));
 }
 
 function addPost() {
   let data = {
-    title: postTitle.value,
-    price: postPrice.value,
-    description: postDescription.value,
+    name: productName.value,
+    price: productPrice.value,
+    description: productDescription.value,
   };
 
   api("POST", data);
 
-  displayPosts();
+  displayproducts();
 
   clearInput();
 }
 
 function setData(i) {
-  globalId = posts[i].id;
-  postTitle.value = posts[i].title;
-  postPrice.value = posts[i].price;
-  postDescription.value = posts[i].description;
+  globalId = products[i].id;
+  productName.value = products[i].name;
+  productPrice.value = products[i].price;
+  productDescription.value = products[i].description;
 
-  addpostBtn.style.display = "none";
-  updatepostBtn.style.display = "block";
+  addProductBtn.style.display = "none";
+  updateProductBtn.style.display = "block";
 }
 
 function updatePost() {
   let data = {
     id: globalId,
-    title: postTitle.value,
-    price: postPrice.value,
-    description: postDescription.value,
+    name: productName.value,
+    price: productPrice.value,
+    description: productDescription.value,
   };
 
   api("PUT", data);
 
-  addpostBtn.style.display = "block";
-  updatepostBtn.style.display = "none";
+  addProductBtn.style.display = "block";
+  updateProductBtn.style.display = "none";
 
   clearInput();
 }
@@ -103,33 +104,33 @@ function deletePost(id) {
 }
 
 function clearInput() {
-  postTitle.value = "";
-  postPrice.value = "";
-  postDescription.value = "";
+  productName.value = "";
+  productPrice.value = "";
+  productDescription.value = "";
 }
 
 function searchPost() {
   let query = searchInput.value.toLowerCase();
-  let filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(query)
+  let filteredproducts = products.filter((post) =>
+    post.name.toLowerCase().includes(query)
   );
-  displayFilteredPosts(filteredPosts);
+  displayFilteredproducts(filteredproducts);
 }
 
-function displayFilteredPosts(filteredPosts) {
+function displayFilteredproducts(filteredproducts) {
   let cartona = ``;
 
-  for (let i = 0; i < filteredPosts.length; i++) {
+  for (let i = 0; i < filteredproducts.length; i++) {
     cartona += `
         <tr>
         <td>${[i + 1]}</td>
-        <td>${filteredPosts[i].title}</td>
-        <td>${filteredPosts[i].price}</td>
-        <td>${filteredPosts[i].description}</td>
+        <td>${filteredproducts[i].name}</td>
+        <td>${filteredproducts[i].price}</td>
+        <td>${filteredproducts[i].description}</td>
         <td>
             <button class="btn btn-update" onclick="setData(${i})">Update</button>
             <button class="btn btn-delete" onclick="deletePost(${
-              filteredPosts[i].id
+              filteredproducts[i].id
             })">Delete</button>
         </td>
     </tr>
