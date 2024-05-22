@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="crud.png">
+
     <title>CRUD Operations</title>
     <link rel="stylesheet" href="./css/style.css" />
   </head>
@@ -16,7 +16,7 @@
           <fieldset>
             <h1>CRUD Operations</h1>
             <div>
-              <label for="title">Post title</label>
+              <label for="title">Product name</label>
               <input
                 class="form__field"
                 type="text"
@@ -44,14 +44,14 @@
             </div>
 
             <button id="add" onclick="addPost()" class="button button--xlarge">
-              Add post &#187;
+              Add product &#187;
             </button>
             <button
               id="update"
               onclick="updatePost()"
               class="button button--xlarge"
             >
-              Update post &#187;
+              Update product &#187;
             </button>
           </fieldset>
         </div>
@@ -61,7 +61,7 @@
         <table class="table">
           <thead>
             <th>Index</th>
-            <th>Title</th>
+            <th>Name</th>
             <th>Price</th>
             <th>Description</th>
             <th>Actions</th>
@@ -74,7 +74,7 @@
 
     <div class="search-input">
       <h2 id="totalPosts">
-        <span>TOTAL POSTS:</span>
+        <span>TOTAL PRODUCTS:</span>
         <span id="total"></span>
       </h2>
 
@@ -82,7 +82,7 @@
         type="text"
         id="searchInput"
         oninput="searchPost()"
-        placeholder="search by title..."
+        placeholder="search by name..."
       />
     </div>
 
