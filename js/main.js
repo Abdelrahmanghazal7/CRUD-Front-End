@@ -10,7 +10,7 @@ let posts = [];
 let globalId = "";
 
 function getData() {
-  fetch("https://crud-node-js.vercel.app/posts")
+  fetch("https://crud-node-js.vercel.app/products")
     .then((response) => response.json())
     .then((data) => {
       posts = data;
@@ -44,7 +44,7 @@ function displayPosts() {
 }
 
 function api(method, data) {
-  fetch("https://crud-node-js.vercel.app/posts", {
+  fetch("https://crud-node-js.vercel.app/products", {
     method,
     headers: {
       Accept: "application/json",
